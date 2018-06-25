@@ -21,13 +21,13 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 import Foundation
 
 public struct IndicatorInfo {
-
+    
     public var title: String?
     public var image: UIImage?
+    public var badge: UIImage?
     public var highlightedImage: UIImage?
     public var accessibilityLabel: String?
     public var userInfo: Any?
@@ -35,6 +35,12 @@ public struct IndicatorInfo {
     public init(title: String?) {
         self.title = title
         self.accessibilityLabel = title
+    }
+    
+    public init(title: String?, badge: UIImage?) {
+        self.title = title
+        self.accessibilityLabel = title
+        self.badge = badge
     }
     
     public init(image: UIImage?, highlightedImage: UIImage? = nil, userInfo: Any? = nil) {
@@ -58,21 +64,21 @@ public struct IndicatorInfo {
         self.highlightedImage = highlightedImage
         self.userInfo = userInfo
     }
-
+    
 }
 
 extension IndicatorInfo : ExpressibleByStringLiteral {
-
+    
     public init(stringLiteral value: String) {
         title = value
         accessibilityLabel = value
     }
-
+    
     public init(extendedGraphemeClusterLiteral value: String) {
         title = value
         accessibilityLabel = value
     }
-
+    
     public init(unicodeScalarLiteral value: String) {
         title = value
         accessibilityLabel = value

@@ -21,14 +21,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 import Foundation
 
 open class ButtonBarViewCell: UICollectionViewCell {
-
+    
+    @IBOutlet open var badgeView: UIImageView!
     @IBOutlet open var imageView: UIImageView!
     @IBOutlet open var label: UILabel!
-
+    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
