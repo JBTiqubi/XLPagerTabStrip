@@ -28,6 +28,7 @@ open class ButtonBarViewCell: UICollectionViewCell {
     @IBOutlet open var badgeView: UIImageView!
     @IBOutlet open var imageView: UIImageView!
     @IBOutlet open var label: UILabel!
+    @IBOutlet open var labeldate: UILabel!
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -35,6 +36,10 @@ open class ButtonBarViewCell: UICollectionViewCell {
         isAccessibilityElement = true
         accessibilityTraits |= UIAccessibilityTraitButton
         accessibilityTraits |= UIAccessibilityTraitHeader
+    }
+    
+    open override func updateConstraints() {
+        super.updateConstraints()
     }
     
     open override var isSelected: Bool {

@@ -48,13 +48,15 @@ public struct ButtonBarPagerTabStripSettings {
         public var buttonBarRightContentInset: CGFloat?
         
         public var selectedBarBackgroundColor = UIColor.black
-        public var selectedBarHeight: CGFloat = 5
+        public var selectedBarHeight: CGFloat = 10
         public var selectedBarVerticalAlignment: SelectedBarVerticalAlignment = .bottom
         
         public var buttonBarItemBackgroundColor: UIColor?
         public var buttonBarItemFont = UIFont.systemFont(ofSize: 18)
+        public var buttonBarSmallItemFont = UIFont.systemFont(ofSize: 12)
         public var buttonBarItemLeftRightMargin: CGFloat = 8
         public var buttonBarItemTitleColor: UIColor?
+        public var buttonBarSmallItemTitleColor = UIColor.gray
         @available(*, deprecated: 7.0.0) public var buttonBarItemsShouldFillAvailiableWidth: Bool {
             set {
                 buttonBarItemsShouldFillAvailableWidth = newValue
@@ -120,7 +122,7 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         let buttonBarViewAux = buttonBarView ?? {
             let flowLayout = UICollectionViewFlowLayout()
             flowLayout.scrollDirection = .horizontal
-            let buttonBarHeight = settings.style.buttonBarHeight ?? 44
+            let buttonBarHeight = settings.style.buttonBarHeight ?? 66 //44
             let buttonBar = ButtonBarView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: buttonBarHeight), collectionViewLayout: flowLayout)
             buttonBar.backgroundColor = .orange
             buttonBar.selectedBar.backgroundColor = .black
@@ -332,9 +334,6 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
             cell.imageView.highlightedImage = highlightedImage
         }
         
-        if let badge = indicatorInfo.badge {
-            cell.badgeView.image = badge
-        }
         
         configureCell(cell, indicatorInfo: indicatorInfo)
         
@@ -351,6 +350,20 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         cell.accessibilityLabel = cell.label.text
         cell.accessibilityTraits |= UIAccessibilityTraitButton
         cell.accessibilityTraits |= UIAccessibilityTraitHeader
+        
+        let centerx = cell.contentView.bounds.size.width/2
+        
+        if let badge = indicatorInfo.badge {
+            cell.badgeView.image = badge
+            cell.badgeView.center.x = centerx
+        }
+        
+        cell.labeldate.text = indicatorInfo.date
+        cell.labeldate.textAlignment = NSTextAlignment.center
+        cell.labeldate.font = settings.style.buttonBarSmallItemFont
+        cell.labeldate.textColor = settings.style.buttonBarSmallItemTitleColor
+        cell.labeldate.center.x = centerx
+        
         return cell
     }
     
